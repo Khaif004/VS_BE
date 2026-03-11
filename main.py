@@ -26,10 +26,7 @@ class Pipeline(BaseModel):
     edges: List[Dict[str, Any]]
 
 def is_dag(nodes: List[Dict[str, Any]], edges: List[Dict[str, Any]]) -> bool:
-    """
-    Check if the graph formed by nodes and edges is a Directed Acyclic Graph (DAG).
-    Uses topological sort with Kahn's algorithm.
-    """
+
     if not nodes:
         return True
     
@@ -68,12 +65,7 @@ def read_root():
 
 @app.post('/pipelines/parse')
 def parse_pipeline(pipeline: Pipeline):
-    """
-    Parse the pipeline and return:
-    - num_nodes: number of nodes in the pipeline
-    - num_edges: number of edges in the pipeline
-    - is_dag: whether the pipeline forms a Directed Acyclic Graph
-    """
+
     num_nodes = len(pipeline.nodes)
     num_edges = len(pipeline.edges)
     dag_status = is_dag(pipeline.nodes, pipeline.edges)
